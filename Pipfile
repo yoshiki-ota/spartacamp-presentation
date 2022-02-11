@@ -7,6 +7,9 @@ name = "pypi"
 requests = "*"
 beautifulsoup4 = "*"
 lxml = "*"
+bs4 = "*"
+flask = "*"
+line-bot-sdk = "*"
 
 [dev-packages]
 
