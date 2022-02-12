@@ -20,5 +20,4 @@ def i():
             url = today_info1.attrs['href']
             # print(title)
             # print(url)
-            return title
-            return url
+            return title, url

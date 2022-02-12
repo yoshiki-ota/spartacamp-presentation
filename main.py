@@ -10,6 +10,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
+import sq
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ["ACCESS_TOKEN"])
@@ -47,8 +49,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    title, url = sq.i()
+    msg = f"{title}, {url}"
     line_bot_api.reply_message(event.reply_token,
-                               TextSendMessage(text=sq.title))
+                               TextSendMessage(text=msg))
 
 
 if __name__ == "__main__":
