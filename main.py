@@ -52,13 +52,11 @@ def handle_message(event):
     keyword = event.message.text
     # ユーザからの検索ワードを取得
     if keyword == "お願い":
-        title, url = sq.i()
-        msg = f"[TITLE]:{title},[URL]: {url}"
+        # title, url = sq.i()
+        # msg = f"[TITLE]:{title},[URL]: {url}"
+        xxx = sq.i()
         line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text=msg))
-    elif keyword != "お願い":
-        line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text=msg))
+                                   TextSendMessage(text=xxx))
 
 
 if __name__ == "__main__":
