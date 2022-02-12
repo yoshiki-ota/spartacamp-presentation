@@ -15,7 +15,7 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 def i():
     for today_info1 in soup.find_all(href=re.compile(today)):
         time.sleep(1)
-        for today_info2 in today_info1.find_all(text=re.compile('(ベンゼマ|メッシ)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(aaa|xxx)')):
             title = today_info2
             url = today_info1.attrs['href']
             if title != "" or url != "":
