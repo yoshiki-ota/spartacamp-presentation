@@ -13,16 +13,37 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 
 
 def i():
+    list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
-        for today_info2 in today_info1.find_all(text=re.compile('(江坂|優勝)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(ナポリ|スターリング)')):
             title = today_info2
             url = today_info1.attrs['href']
-            # msg = f"[TITLE]:{title},[URL]: {url}"
-            # return [title, url]
             list = [title, url]
+            # list.append(title)
+            # list.append(url)
             result = '\n'.join(list)
-            return result
+            # return result
+            print(result)
+
+
+def o(word):
+    count = 0
+    list = []
+
+    for today_info1 in soup.find_all(href=re.compile(today)):
+        if today_info1.contents[0].find(word) > -1:
+            list.append(today_info1.contents[0])
+            list.append(today_info1.get('href'))
+            count += 1
+        if count == 0:
+            list.append("記事が見つかりませんでした！！")
+
+        result = '\n'.join(list)
+        print(result)
+
+        # return result
 
 
 if __name__ == '__main__':
-    i()
+    # i()
+    o()
