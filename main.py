@@ -56,6 +56,9 @@ def handle_message(event):
         msg = f"[TITLE]:{title},[URL]: {url}"
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=msg))
+    elif keyword != "お願い":
+        line_bot_api.reply_message(event.reply_token,
+                                   TextSendMessage(text=msg))
 
 
 if __name__ == "__main__":
