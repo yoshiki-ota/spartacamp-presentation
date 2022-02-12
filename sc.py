@@ -26,6 +26,13 @@ def i():
 
 
 def x(word):
+    today_dummy = datetime.date.today()
+    today = today_dummy.strftime('%Y%m%d')
+
+    URL = "https://www.soccer-king.jp/"  # トップページ情報取得
+    rest = requests.get(URL)  # 情報格納
+    soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解析
+    infomation = soup.find_all(href=re.compile(today))
     count = 0
     list = []
 
