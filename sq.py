@@ -18,6 +18,9 @@ def i():
         for today_info2 in today_info1.find_all(text=re.compile('(ベンゼマ|メッシ)')):
             title = today_info2
             url = today_info1.attrs['href']
-            # print(title)
-            # print(url)
-            return title, url
+            if title != "" or url != "":
+                # print(title)
+                # print(url)
+                return title, url
+            else:
+                return "該当する記事が見つかりませんでした"
