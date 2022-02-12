@@ -49,12 +49,16 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    keyword = event.message.text
     # ユーザからの検索ワードを取得
-    if event.message.text == "555":
+    if event.message.text == "お願い":
         title, url = sq.i()
         msg = f"[TITLE]:{title},[URL]: {url}"
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=msg))
+    elif event.message.text == "":
+        line_bot_api.reply_message(event.reply_token,
+                                   TextSendMessage(text="何かメッセージを入力してください"))
 
 
 if __name__ == "__main__":
