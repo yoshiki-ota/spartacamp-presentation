@@ -21,8 +21,7 @@ def i():
             # return [title, url]
             list = [title, url]
             result = '\n'.join(list)
-            # return result
-            print(result)
+            return result
 
     # return msg
     # return msg[title+url]
