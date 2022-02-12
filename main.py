@@ -54,9 +54,10 @@ def handle_message(event):
     if keyword == "お願い":
         # title, url = sq.i()
         # msg = f"[TITLE]:{title},[URL]: {url}"
-        xxx = sc.i()
-        line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text=xxx))
+        # xxx = sc.i()
+        for xxx in sc.i():
+            line_bot_api.reply_message(event.reply_token,
+                                       TextSendMessage(text=xxx))
 
 
 if __name__ == "__main__":

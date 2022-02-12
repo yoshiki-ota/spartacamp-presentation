@@ -13,15 +13,15 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 
 
 def i():
-    list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
         for today_info2 in today_info1.find_all(text=re.compile('(江坂|横浜)')):
             title = today_info2
             url = today_info1.attrs['href']
             msg = f"[TITLE]:{title},[URL]: {url}"
+            return msg
             # return msg[title+url]
             # print([title, url])
-            return [title, url]
+            # return [title, url]
 
 
 if __name__ == '__main__':
