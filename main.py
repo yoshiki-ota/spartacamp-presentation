@@ -49,6 +49,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    # ユーザからの検索ワードを取得
+    word = event.message.text
+
     title, url = sq.i()
     msg = f"[TITLE]:{title},[URL]: {url}"
     line_bot_api.reply_message(event.reply_token,
