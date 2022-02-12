@@ -15,12 +15,7 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 def i():
     for today_info1 in soup.find_all(href=re.compile(today)):
         time.sleep(1)
-        for today_info2 in today_info1.find_all(text=re.compile('(aaa|xxx)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(江坂|横浜)')):
             title = today_info2
             url = today_info1.attrs['href']
-            if title != "" or url != "":
-                # print(title)
-                # print(url)
-                return title, url
-            else:
-                return "該当する記事が見つかりませんでした"
+            return title, url
