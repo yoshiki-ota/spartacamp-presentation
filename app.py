@@ -8,11 +8,9 @@ def index():
     if request.method == "GET":
         return render_template('index.html')
     if request.method == "POST":
-        return
-
-    player = request.form['player']
-    team = request.form['team']
-    print(player, team)
+        player = request.form['player']
+        team = request.form['team']
+        return render_template("index.html", player=player, team=team)
 
 
 if __name__ == '__main__':

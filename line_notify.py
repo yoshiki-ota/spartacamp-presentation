@@ -1,3 +1,4 @@
+import datetime
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -14,6 +15,24 @@ def send_line_notify(notification_message):
 
 
 def job():
+    today_dummy = datetime.date.today()
+    today = today_dummy.strftime('%Y%m%d')
+
+    URL = "https://www.soccer-king.jp/"  # トップページ情報取得
+    rest = requests.get(URL)  # 情報格納
+    soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解析
+
+    for today_info1 in soup.find_all(href=re.compile(today)):
+        time.sleep(1)
+        for today_info2 in today_info1.find_all(text=re.compile('(ミラン|川崎)')):
+            title = today_info2
+            url = today_info1.attrs['href']
+            send_line_notify(title)
+            send_line_notify(url)
+
+
+"""
+def job():
     # トップページ情報取得
     URL = "https://www.soccer-king.jp/"
     # 情報格納
@@ -25,6 +44,7 @@ def job():
         title_url = x.attrs['href']
         send_line_notify(title_text)
         send_line_notify(title_url)
+"""
 
 
 def main():
