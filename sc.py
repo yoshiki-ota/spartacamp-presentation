@@ -10,6 +10,7 @@ today = today_dummy.strftime('%Y%m%d')
 URL = "https://www.soccer-king.jp/"  # トップページ情報取得
 rest = requests.get(URL)  # 情報格納
 soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解析
+infomation = soup.find_all(href=re.compile(today))
 
 
 def i():
@@ -23,11 +24,23 @@ def i():
             result = '\n'.join(list)
             return result
 
-    # return msg
-    # return msg[title+url]
-    # print([title, url])
-    # return [title, url]
+
+def x(word):
+    count = 0
+    list = []
+
+    for topic in infomation:
+        if topic.contents[0].find(word) > -1:
+            list.append(topic.contents[0])
+            list.append(topic.get('href'))
+            count += 1
+    if count == 0:
+        list.append("記事が見つかりませんでした！！")
+
+    result = '\n'.join(list)
+    return result
 
 
 if __name__ == '__main__':
-    i()
+    # i()
+    x()

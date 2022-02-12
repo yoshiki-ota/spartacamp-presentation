@@ -49,19 +49,25 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    keyword = event.message.text
-    # ユーザからの検索ワードを取得
-    if keyword == "お願い":
-        # title, url = sq.i()
-        # msg = f"[TITLE]:{title},[URL]: {url}"
-        xxx = sc.i()
-        # for xxx in sc.i():
-        #     line_bot_api.reply_message(event.reply_token,
-        #                                TextSendMessage(text=xxx))
-        line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text=xxx))
+    word = event.message.text
+    result = sc.x(word)
 
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=result)
+    )
+    # keyword = event.message.text
+    # # ユーザからの検索ワードを取得
+    # if keyword == "お願い":
+    #     # title, url = sq.i()
+    #     # msg = f"[TITLE]:{title},[URL]: {url}"
+    #     xxx = sc.i()
+    #     # for xxx in sc.i():
+    #     #     line_bot_api.reply_message(event.reply_token,
+    #     #                                TextSendMessage(text=xxx))
+    #     line_bot_api.reply_message(event.reply_token,
+    #                                TextSendMessage(text=xxx))
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
+    if __name__ == "__main__":
+        port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
