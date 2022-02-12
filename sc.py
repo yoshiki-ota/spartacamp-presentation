@@ -3,6 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 import re
+import main
 
 today_dummy = datetime.date.today()
 today = today_dummy.strftime('%Y%m%d')
@@ -19,6 +20,3 @@ def i():
             url = today_info1.attrs['href']
             msg = f"[TITLE]:{title},[URL]: {url}"
             return msg
-    #         print(title)
-    #         print(url)
-    # # return title, url
