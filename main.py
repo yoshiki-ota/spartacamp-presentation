@@ -1,42 +1,56 @@
-import datetime
-import time
-import requests
-from bs4 import BeautifulSoup
-import re
+import os
 
-today_dummy = datetime.date.today()
-today = today_dummy.strftime('%Y%m%d')
+from flask import Flask, request, abort
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage)
 
-URL = "https://www.soccer-king.jp/"  # トップページ情報取得
-rest = requests.get(URL)  # 情報格納
-soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解析
+app = Flask(__name__)
 
-
-def information():
-    for today_info1 in soup.find_all(href=re.compile(today)):
-        time.sleep(1)
-        for today_info2 in today_info1.find_all(text=re.compile('(ミラン|川崎)')):
-            title = today_info2
-            url = today_info1.attrs['href']
-            print(title)
+line_bot_api = LineBotApi(os.environ["ACCESS_TOKEN"])
+handler = WebhookHandler(os.environ["CHANNEL_SECRET"])
 
 
-"""　一応ベースは残しておく
-soup = BeautifulSoup(rest.text, 'lxml')
-time.sleep(1)
-for x in soup.find_all(href=re.compile("20220211")):
-    time.sleep(3)
-    title_text = x.find_all('p', class_='tit')
-    title_url = x.attrs['href']
-    print(title_text)
-    print(title_url)
-"""
+@app.route('/')
+def index():
+    return 'You call index()'
 
 
-def main():
-    information()
-    time.sleep(1)
+@app.route("/push_sample")
+def push_sample():
+    """プッシュメッセージを送る"""
+    user_id = os.environ["USER_ID"]
+    line_bot_api.push_message(user_id, TextSendMessage(text="Hello World!"))
+
+    return "OK"
 
 
-if __name__ == '__main__':
-    main()
+@app.route("/callback", methods=["POST"])
+def callback():
+    """Messaging APIからの呼び出し関数"""
+    signature = request.headers["X-Line-Signature"]
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError as e:
+        abort(400)
+
+    return "OK"
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    line_bot_api.reply_message(event.reply_token,
+                               TextSendMessage(text=event.message.text))
+
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

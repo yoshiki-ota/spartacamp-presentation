@@ -24,7 +24,7 @@ def job():
 
     for today_info1 in soup.find_all(href=re.compile(today)):
         time.sleep(1)
-        for today_info2 in today_info1.find_all(text=re.compile('(ミラン|川崎)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(レネガス|川崎)')):
             title = today_info2
             url = today_info1.attrs['href']
             send_line_notify(title)
@@ -50,7 +50,7 @@ def job():
 def main():
     job()
     # #sleep(1)で1秒間隔を置き負荷を軽減
-    time.sleep(3)
+    time.sleep(1)
 
 
 if __name__ == '__main__':

@@ -11,6 +11,7 @@ bs4 = "*"
 flask = "*"
 line-bot-sdk = "*"
 schedule = "*"
+scrape = "*"
 
 [dev-packages]
 
