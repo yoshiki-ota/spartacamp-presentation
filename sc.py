@@ -1,4 +1,5 @@
 import datetime
+import keyword
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -15,15 +16,15 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 def i():
     list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
-        for today_info2 in today_info1.find_all(text=re.compile('(ナポリ|ベイル)')):
+        for today_info2 in today_info1.find_all(text=re.compile(keyword)):
             title = today_info2
             url = today_info1.attrs['href']
             list = [title, url]
             # list.append(title)
             # list.append(url)
             result = '\n'.join(list)
-            return result
-            # print(result)
+            # return result
+            print(result)
 
 
 # def o():
