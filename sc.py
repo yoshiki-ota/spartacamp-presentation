@@ -22,8 +22,8 @@ def i():
             # list.append(title)
             # list.append(url)
             result = '\n'.join(list)
-            # return result
-            print(result)
+            return result
+            # print(result)
 
 
 # def o():
