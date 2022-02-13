@@ -16,7 +16,7 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 def i():
     list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
-        for today_info2 in today_info1.find_all(text=re.compile('(ナポリ|ベイル)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(チェルシー|ベイル)')):
             title = today_info2
             url = today_info1.attrs['href']
             list = [title, url]
@@ -26,7 +26,8 @@ def i():
             return result
             # print(result)
 
-# def o():
+
+# def o():　試した１
 #     count = 0
 #     list = []
 #     word = "チェルシー"
@@ -43,7 +44,7 @@ def i():
 #         # return result
 #
 #
-# def r():
+# def r():　　試した２
 #     count = 0
 #     list = []
 #     word = "優勝"
