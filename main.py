@@ -55,15 +55,6 @@ def handle_message(event):
         xxx = sc.i()
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=xxx))
-    elif keyword == "太田":
-        xxx = sc.i()
-        line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text="自分自身"))
-
-    elif keyword == "ゆうま":
-        xxx = sc.i()
-        line_bot_api.reply_message(event.reply_token,
-                                   TextSendMessage(text="それは職場で一番仲の良い友人ですね"))
 
 
 # @handler.add(MessageEvent, message=TextMessage)
