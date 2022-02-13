@@ -16,7 +16,7 @@ soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解�
 def i():
     list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
-        for today_info2 in today_info1.find_all(text=re.compile('(チェルシー|ベイル)')):
+        for today_info2 in today_info1.find_all(text=re.compile('(チェルシー|おおおお)')):
             title = today_info2
             url = today_info1.attrs['href']
             list = [title, url]
