@@ -13,7 +13,7 @@ rest = requests.get(URL)  # 情報格納
 soup = BeautifulSoup(rest.text, 'lxml')  # BeautifulSoupを用いてlxmlで解析
 
 
-def i():
+def i(keyword):
     list = []
     for today_info1 in soup.find_all(href=re.compile(today)):
         for today_info2 in today_info1.find_all(text=re.compile(keyword)):

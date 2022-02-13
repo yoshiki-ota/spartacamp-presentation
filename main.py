@@ -50,9 +50,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     keyword = event.message.text
+    xxx = sc.i(keyword)
     # ユーザからの検索ワードを取得
     if keyword == "お願い":
-        xxx = sc.i()
         line_bot_api.reply_message(event.reply_token,
                                    TextSendMessage(text=xxx))
 
